@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock head %}
+
+{% block body %}
+
+        <div class="row mt-5 mb-3"> 
+                <h1> {{ post.title }} <a href='{% url 'post:update' post.id %}'> <span class="badge badge-secondary">Edit</span> </a> </h1>
+        </div>
+
+        <div class="row"> 
+                <small> Date Created: {{ post.date_created}}</small> 
+        </div>
+        <div class="row"> 
+                <small> Last Updated: {{ post.date_updated}}</small>
+        </div>
+        <div class="row"> 
+                <p class="text-justify mt-5 mb-5"> {{ post.content }} <p>
+        </div>
+
+        <div class="row">
+                <ul class="list-group w-100">
+                        {% for comment in post.comment_set.all %}
+                                <a class="list-group-item list-group-item-action">
+                                        <div class="d-flex w-100 justify-content-between">
+                                        <small> {{ comment.date_created }} </small>
+                                        </div>
+                                        <p class="mb-1">{{ comment.content }}</p>
+                                </a>
+                                
+                        {% endfor %}
+                </ul>
+        </div>
+
+        <div class="row mt-5">
+                <form action="{% url 'post:detail' post.id%}" method="POST">
+                        {% csrf_token %}
+
+                        
+                        <div class="col-auto my-1">
+                                {{ comment.content }}
+                        </div>
+                        <div class="col-auto my-1">
+                                <button type="submit" value="Add" class="btn btn-primary">Comment</button>
+                        </div>
+                </form>
+        </div>
+
+
+
+{% endblock body %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %} 
+
+{% block head %}
+    this is the title page
+{% endblock head %}
+
+{% block body %}
+    <div class="row mt-5 mb-5">
+        <h2 class="ml-3"> All Posts <a href='{% url 'post:add' %}'> <span class="btn btn-outline-primary ml-3">Add New Post</span> </a> </h2>
+    </div>
+    <div class="list-group">
+        {% for post in posts %}
+            <a href="{% url 'post:detail' post.id %}" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ post.title }}</h5>
+                    <small> {{ post.date_created }} </small>
+                </div>
+
+                <p class="mb-1"> {{ post.content }} </p>
+                <small>Last Updated: {{ post.date_updated }} </small>
+            </a>
+
+        {% endfor %}
+    </div>
+{% endblock body %}
