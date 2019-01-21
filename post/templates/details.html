@@ -36,14 +36,10 @@
         <div class="row mt-5">
                 <form action="{% url 'post:detail' post.id%}" method="POST">
                         {% csrf_token %}
+                        <p hidden>{{comment.post}}</p>
+                        {{comment.content}}
 
-                        
-                        <div class="col-auto my-1">
-                                {{ comment.content }}
-                        </div>
-                        <div class="col-auto my-1">
-                                <button type="submit" value="Add" class="btn btn-primary">Comment</button>
-                        </div>
+                        <button type="submit" value="Add" class="btn btn-primary mb-2">Submit</button>
                 </form>
         </div>
 

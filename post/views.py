@@ -7,7 +7,7 @@ from .forms import PostModelForm, CommentModelForm
 
 def index(request):
     context = {}
-    context['posts'] = Post.objects.all()
+    context['posts'] = Post.objects.all().filter(is_active=True)
     return render(request, 'index.html', context)
 
 def details(request, post_id):
